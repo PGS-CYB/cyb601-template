@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: juice-shop, namespace: shop }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: juice-shop } }
+  template:
+    metadata: { labels: { app: juice-shop } }
+    spec:
+      containers:
+        - name: juice-shop
+          image: bkimminich/juice-shop:v17.1.1   # pin a version; update as needed
+          ports: [{ containerPort: 3000 }]
+---
+apiVersion: v1
+kind: Service
+metadata: { name: juice-shop, namespace: shop }
+spec:
+  selector: { app: juice-shop }
+  ports: [{ port: 80, targetPort: 3000 }]

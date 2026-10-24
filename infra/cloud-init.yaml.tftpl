@@ -1,0 +1,18 @@
+#cloud-config
+package_update: true
+packages:
+  - jq
+  - nmap
+write_files:
+  - path: /etc/rancher/k3s/config.yaml
+    content: |
+      # Lab 4 adds hardening settings here (audit log, etc.).
+      write-kubeconfig-mode: "0600"
+runcmd:
+  - curl -sfL https://get.k3s.io -o /root/install-k3s.sh
+  - INSTALL_K3S_VERSION="${k3s_version}" sh /root/install-k3s.sh
+  - mkdir -p /home/ubuntu/.kube
+  - cp /etc/rancher/k3s/k3s.yaml /home/ubuntu/.kube/config
+  - chown -R ubuntu:ubuntu /home/ubuntu/.kube
+  - chmod 600 /home/ubuntu/.kube/config
+  - echo 'export KUBECONFIG=$HOME/.kube/config' >> /home/ubuntu/.bashrc

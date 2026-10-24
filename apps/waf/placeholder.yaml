@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: waf, namespace: waf }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: waf } }
+  template:
+    metadata: { labels: { app: waf } }
+    spec:
+      containers:
+        - name: waf
+          image: nginx:stable   # Lab 5: swap for an image with ModSecurity + CRS
+          ports: [{ containerPort: 80 }]

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata: { name: shop }
+---
+apiVersion: v1
+kind: Namespace
+metadata: { name: api }
+---
+apiVersion: v1
+kind: Namespace
+metadata: { name: data }
+---
+apiVersion: v1
+kind: Namespace
+metadata: { name: waf }

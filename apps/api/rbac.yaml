@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: customer-api, namespace: api }
+---
+# PLANTED: far more access than a web API needs. Replace with a least-
+# privilege Role in Lab 3.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: { name: customer-api-too-much }
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view        # cluster-wide read, including Secrets in many setups
+subjects:
+  - kind: ServiceAccount
+    name: customer-api
+    namespace: api

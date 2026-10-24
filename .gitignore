@@ -1,0 +1,20 @@
+# Terraform state and cache – may contain sensitive values, never commit
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+
+# Commit the lock file: it pins provider checksums (a supply-chain control)
+!.terraform.lock.hcl
+
+# Local credentials and kubeconfigs
+*.kubeconfig
+kubeconfig*
+.env
+*.pem
+*.key
+
+# OS and editor noise
+.DS_Store
+.vscode/
